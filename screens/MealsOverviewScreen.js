@@ -24,7 +24,7 @@ function MealsOverviewScreen({ route, navigation }) {
       renderItem={({ item }) => (
         <MealItem
           {...item}
-          onPress={() => navigation.navigate("MealItem", { item })}
+          onPress={() => navigation.navigate("MealDetail", { mealId: item.id })}
         />
       )}
       keyExtractor={({ id }) => id}
