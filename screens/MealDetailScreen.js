@@ -12,12 +12,8 @@ function MealDetailScreen({ navigation, route }) {
     params: { mealId },
   } = route;
   const selectedMeal = MEALS.find(({ id }) => id === mealId);
-  const { ids, addFavorit, removeFavorit } = useFavoritMeals();
+  const { ids, toggleFavorit } = useFavoritMeals();
   const mealIsFavorit = ids.includes(mealId);
-
-  function favoritMealHandler() {
-    mealIsFavorit ? removeFavorit(mealId) : addFavorit(mealId);
-  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -26,11 +22,11 @@ function MealDetailScreen({ navigation, route }) {
         <IconButton
           icon={mealIsFavorit ? "star" : "star-outline"}
           color="white"
-          onPress={favoritMealHandler}
+          onPress={() => toggleFavorit(mealId)}
         />
       ),
     });
-  }, [selectedMeal, favoritMealHandler]);
+  }, [selectedMeal, mealIsFavorit, toggleFavorit]);
 
   return (
     <ScrollView>

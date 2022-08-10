@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import MealDetails from "./MealDetails";
+import MealDetails from "../MealDetails";
 
 function MealItem({
   title,
@@ -35,7 +35,7 @@ function MealItem({
             duration={duration}
           />
         </View>
-      </Pressable> 
+      </Pressable>
     </View>
   );
 }

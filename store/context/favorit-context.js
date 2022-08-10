@@ -15,7 +15,16 @@ export function FavoritMealsProvider(props) {
     );
   }
 
-  const value = { ids: favoritMealsIds, addFavorit, removeFavorit };
+  function toggleFavorit(mealId) {
+    favoritMealsIds.includes(mealId)
+      ? removeFavorit(mealId)
+      : addFavorit(mealId);
+  }
+
+  const value = {
+    ids: favoritMealsIds,
+    toggleFavorit,
+  };
 
   return <FavoritsContext.Provider value={value} {...props} />;
 }
