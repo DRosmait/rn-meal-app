@@ -5,25 +5,32 @@ import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/dummy-data";
+import { useFavoritMeals } from "../store/context/favorit-context";
 
 function MealDetailScreen({ navigation, route }) {
   const {
     params: { mealId },
   } = route;
   const selectedMeal = MEALS.find(({ id }) => id === mealId);
+  const { ids, addFavorit, removeFavorit } = useFavoritMeals();
+  const mealIsFavorit = ids.includes(mealId);
+
+  function favoritMealHandler() {
+    mealIsFavorit ? removeFavorit(mealId) : addFavorit(mealId);
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: selectedMeal.title,
       headerRight: () => (
         <IconButton
-          icon="star"
+          icon={mealIsFavorit ? "star" : "star-outline"}
           color="white"
-          onPress={() => console.log("Pressed")}
+          onPress={favoritMealHandler}
         />
       ),
     });
-  }, [selectedMeal]);
+  }, [selectedMeal, favoritMealHandler]);
 
   return (
     <ScrollView>
